@@ -1,0 +1,17 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.example.custom.recipe.MigrateSpringToQuarkus
+recipeList:
+  - org.openrewrite.maven.RemoveDependency:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-starter
+  - org.openrewrite.maven.RemoveDependency:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-starter-web
+  - org.openrewrite.maven.RemoveDependency:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-starter-test
+  - org.openrewrite.maven.RemovePlugin:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-maven-plugin
+  - org.openrewrite.DeleteSourceFiles:
+      filePattern: "**/DemoApplication*.java"

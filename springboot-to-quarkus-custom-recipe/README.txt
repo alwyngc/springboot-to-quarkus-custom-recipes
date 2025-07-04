@@ -1,0 +1,1 @@
+recipe to migrate springboot project to quarkus
