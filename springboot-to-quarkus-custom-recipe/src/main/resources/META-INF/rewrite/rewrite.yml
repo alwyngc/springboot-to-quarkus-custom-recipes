@@ -20,8 +20,8 @@ recipeList:
         annotationPattern: '@org.springframework.web.bind.annotation.RestController'
   # Replace class-level mapping
   - org.openrewrite.java.ReplaceAnnotation:
-        annotationPatternToReplace: '@org.springframework.web.bind.annotation.RequestMapping("/home")'
-        annotationTemplateToInsert: '@javax.ws.rs.Path("/home")'
+        annotationPatternToReplace: '@org.springframework.web.bind.annotation.RequestMapping("/")'
+        annotationTemplateToInsert: '@javax.ws.rs.Path("/")'
   # Replace method-level mapping
   - org.openrewrite.java.ReplaceAnnotation:
         annotationPatternToReplace: '@org.springframework.web.bind.annotation.GetMapping("/heart-beat")'
