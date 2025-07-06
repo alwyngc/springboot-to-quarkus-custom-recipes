@@ -1,5 +1,5 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: com.example.custom.recipe.MigrateSpringToQuarkus
+name: com.example.custom.recipe.MigrateSpringToQuarkusRest
 recipeList:
   - org.openrewrite.maven.RemoveDependency:
       groupId: org.springframework.boot
@@ -15,3 +15,15 @@ recipeList:
       artifactId: spring-boot-maven-plugin
   - org.openrewrite.DeleteSourceFiles:
       filePattern: "**/DemoApplication*.java"
+
+  - org.openrewrite.java.RemoveAnnotation:
+        annotationPattern: '@org.springframework.web.bind.annotation.RestController'
+  # Replace class-level mapping
+  - org.openrewrite.java.ReplaceAnnotation:
+        annotationPatternToReplace: '@org.springframework.web.bind.annotation.RequestMapping("/home")'
+        annotationTemplateToInsert: '@javax.ws.rs.Path("/home")'
+  # Replace method-level mapping
+  - org.openrewrite.java.ReplaceAnnotation:
+        annotationPatternToReplace: '@org.springframework.web.bind.annotation.GetMapping("/heart-beat")'
+        annotationTemplateToInsert: |
+          @javax.ws.rs.GET
